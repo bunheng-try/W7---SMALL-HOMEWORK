@@ -18,10 +18,10 @@ class LibraryContent extends StatelessWidget {
     List<Song> songs = libraryViewModel.songs;
 
     // 2- Read the globbal settings state
-    AppSettingsState settingsState = context.read<AppSettingsState>();
+    AppSettingsState settingsState = context.watch<AppSettingsState>();
 
     // 3 - Watch the globbal player state
-    PlayerState playerState = libraryViewModel.playerState;
+    PlayerState playerState = context.watch<PlayerState>();
 
     return Container(
       color: settingsState.theme.backgroundColor,

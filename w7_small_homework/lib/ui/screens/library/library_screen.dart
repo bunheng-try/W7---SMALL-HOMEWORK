@@ -8,20 +8,21 @@ import '../../../model/songs/song.dart';
 import '../../states/player_state.dart';
 import '../../states/settings_state.dart';
 import '../../theme/theme.dart';
-
 class LibraryScreen extends StatelessWidget {
   const LibraryScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    
+    final playerState = context.watch<PlayerState>();
+    final songRepository = context.read<SongRepository>();
+
     return ChangeNotifierProvider(
-      child: LibraryContent(),
-      create: (_) {
-        return LibraryViewModel(
-          playerState: context.read<PlayerState>(),
-          songRepository: context.watch<SongRepository>(),
-        );
-      },
+      create: (_) => LibraryViewModel(
+        playerState: playerState,
+        songRepository: songRepository,
+      ),
+      child: const LibraryContent(),
     );
   }
 }
